@@ -7,6 +7,7 @@ type Props = {
 export const AddButton = ({ onClick, disabled }: Props) => {
   return (
     <button
+      data-testid="add-button"
       className="button button-with-icon"
       onClick={onClick}
       disabled={disabled}

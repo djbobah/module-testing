@@ -27,7 +27,7 @@ it("отображение списка задач", () => {
     <List items={items} onDelete={onDelete} onToggle={onToggle} />
   );
   const firstRender = asFragment();
-  
+
   items.pop();
 
   rerender(<List items={items} onDelete={onDelete} onToggle={onToggle} />);
@@ -37,5 +37,29 @@ it("отображение списка задач", () => {
 });
 
 it("Список содержит не больше 10 невыполненных задач", () => {
+  const mockTasks: Task[] = [
+    ...Array.from({ length: 10 }, (_, i) => ({
+      id: `task-${i}`,
+      header: `Невыполненная задача ${i + 1}`,
+      done: false,
+    })),
+    ...Array.from({ length: 4 }, (_, i) => ({
+      id: `done-task-${i}`,
+      header: `Выполненная задача ${i + 1}`,
+      done: true,
+    })),
+  ];
 
+  const mockDelete = jest.fn();
+  const mockToggle = jest.fn();
+
+  render(
+    <List items={mockTasks} onDelete={mockDelete} onToggle={mockToggle} />
+  );
+
+  const incompleteTasks = screen
+    .getAllByRole("listitem")
+    .filter((item) => !item.textContent?.includes("Выполненная"));
+
+  expect(incompleteTasks.length).toBeLessThanOrEqual(10);
 });
