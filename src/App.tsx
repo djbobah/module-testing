@@ -5,7 +5,7 @@ import { NewTaskBar } from "./modules/NewTaskBar";
 import { TaskList } from "./modules/TaskList";
 import { Provider } from "react-redux";
 import { NotifierContainer } from "./modules/NotifierContainer";
-
+import { FilterBar } from "./modules/FilterBar";
 
 export const App = () => {
   return (
@@ -13,6 +13,7 @@ export const App = () => {
       <Provider store={store}>
         <h3>Список задач</h3>
         <NewTaskBar />
+        <FilterBar />
         <TaskList />
         <NotifierContainer />
       </Provider>

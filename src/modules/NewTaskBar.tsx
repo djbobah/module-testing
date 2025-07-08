@@ -3,7 +3,7 @@ import { AddButton } from "src/components/AddButton";
 import { Input } from "src/components/Input";
 import { validateHeaderMax, validateHeaderMin } from "src/utils/helpers";
 import { useDispatch, useSelector } from "react-redux";
-import { addTask, uncompleteCount } from "src/store/taskSlice";
+import { addTask, resetState, uncompleteCount } from "src/store/taskSlice";
 
 import "./styles.css";
 
