@@ -5,7 +5,7 @@ describe("Элемент списка задач", () => {
   const onDelete = jest.fn();
   const onToggle = jest.fn();
   it("название не должно быть больше 32 символов", () => {
-    const { container } = render(
+    render(
       <Item
         onDelete={onDelete}
         onToggle={onToggle}
@@ -14,11 +14,11 @@ describe("Элемент списка задач", () => {
         done={false}
       />
     );
-    const labelEl = container.querySelector("label");
+    const labelEl = screen.getByTestId("label-test-id");
     expect(labelEl?.textContent?.length).toBeLessThan(33);
   });
   it("название не должно быть пустым", () => {
-    const { container } = render(
+    render(
       <Item
         onDelete={onDelete}
         onToggle={onToggle}
@@ -27,7 +27,7 @@ describe("Элемент списка задач", () => {
         done={false}
       />
     );
-    const labelEl = container.querySelector("label");
+    const labelEl = screen.getByTestId("label-test-id");
     expect(labelEl?.textContent).not.toBe("");
   });
   it("нельзя удалять невыполненные задачи", () => {
@@ -40,7 +40,7 @@ describe("Элемент списка задач", () => {
         done={false}
       />
     );
-    const delBtn = screen.getByRole("button");
+    const delBtn = screen.getByRole("button", { name: "Delete button" });
     expect(delBtn).toBeDisabled();
   });
   it("кнопка удаления должна быть активна для выполненной задачи", () => {
@@ -53,7 +53,7 @@ describe("Элемент списка задач", () => {
         done={true}
       />
     );
-    const delBtn = screen.getByRole("button");
+    const delBtn = screen.getByRole("button", { name: "Delete button" });
     expect(delBtn).not.toBeDisabled();
   });
   it("должен вызывать onDelete при клике на кнопку удаления (если задача выполнена)", () => {
@@ -67,7 +67,7 @@ describe("Элемент списка задач", () => {
       />
     );
 
-    const delBtn = screen.getByRole("button");
+    const delBtn = screen.getByRole("button", { name: "Delete button" });
     delBtn.click();
 
     expect(onDelete).toHaveBeenCalledWith("1");

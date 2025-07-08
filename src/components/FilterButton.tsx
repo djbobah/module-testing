@@ -13,6 +13,7 @@ export const FilterButton = ({ onClick }: Props) => {
       data-testid="filter-button"
       className="button button-with-icon"
       onClick={onClick}
+      aria-label="Toggle filter"
       data-alt="Фильтр"
     >
       {filter ? (

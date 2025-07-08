@@ -18,9 +18,13 @@ describe("Task List Filtering", () => {
     render(<App />, {
       wrapper: JestStoreProvider,
     });
+    act(() => {
+      store.dispatch(resetState());
+    });
+
     input = screen.getByRole("textbox");
-    addButton = screen.getByTestId("add-button");
-    filterButton = screen.getByTestId("filter-button");
+    addButton = screen.getByRole("button", { name: "Add button" });
+    filterButton = screen.getByRole("button", { name: "Toggle filter" });
 
     await userEvent.type(input, "Задача 1");
     await userEvent.click(addButton);
@@ -29,11 +33,6 @@ describe("Task List Filtering", () => {
 
     const checkboxes = screen.getAllByRole("checkbox");
     await userEvent.click(checkboxes[0]);
-  });
-  afterEach(async () => {
-    act(() => {
-      store.dispatch(resetState());
-    });
   });
 
   it("с включенным фильтром", async () => {

@@ -10,6 +10,7 @@ export const DeleteButton = ({ onClick, disabled }: Props) => {
       className="button button-with-icon"
       onClick={onClick}
       disabled={disabled}
+      aria-label="Delete button"
       data-alt="Удалить"
     >
       <img src={TrashIcon} alt="Удалить" />

@@ -24,8 +24,9 @@ describe("Оповещение при вополнении задачи", () => 
       <Notifier task="Второе оповещение" open={true} onClose={mockOnClose} />
     );
 
+    const notifier = screen.getByTestId("notifier-text-text-id");
     // Первое должно исчезнуть, появиться второе
-    expect(screen.queryByText("Первое оповещение")).not.toBeInTheDocument();
-    expect(screen.getByText("Второе оповещение")).toBeInTheDocument();
+    expect(notifier).not.toHaveTextContent("Первое оповещение");
+    expect(notifier).toHaveTextContent("Второе оповещение");
   });
 });
